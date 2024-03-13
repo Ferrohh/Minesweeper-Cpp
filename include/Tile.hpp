@@ -24,12 +24,11 @@ enum tile_rect
 
 struct tile
 {
-    SDL_Texture* tex;
     SDL_Rect rect;
     tile_rect state;
 
-    tile(SDL_Texture* p_tex, tile_rect p_rect)
-    :tex(p_tex), state(p_rect)
+    tile(tile_rect p_rect)
+    :state(p_rect)
     {
         rect.h = 16;
         rect.w = 16;

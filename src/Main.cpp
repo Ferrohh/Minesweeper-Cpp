@@ -12,15 +12,17 @@
 #include "Game.hpp"
 
 // constants
-#define ROWS 16
-#define COLS 16
+#define ROWS 15
+#define COLS 15
 
-#define SCALE 3
+#define SCALE 1
 
 #define N_BOMBS 40
 
-#define W_W 16*ROWS*SCALE
-#define W_H 16*COLS*SCALE
+#define W_W 16*COLS*SCALE
+#define W_H 16*ROWS*SCALE
+
+#define MS 80
 
 
 // window & renderer
@@ -41,8 +43,6 @@ int main()
     srand(time(NULL));
     if(!SDL_init_all()) return 1; // error initializing SDL
 
-    minesweeper.generate_bombs();
-
     while(running)
     {
         while(SDL_PollEvent(&events))
@@ -52,6 +52,17 @@ int main()
                 case SDL_QUIT:
                     running = false;
                     break;
+                case SDL_MOUSEBUTTONDOWN:
+                    if(playing)
+                    {
+                        switch(events.button.button)
+                        {
+                            case SDL_BUTTON_RIGHT:
+                                minesweeper.place_flag(W_W, W_H);
+                                break;
+                        }
+                    }
+                    break;
                 case SDL_MOUSEBUTTONUP:
                     if(playing)
                     {
@@ -59,9 +70,6 @@ int main()
                         {
                             case SDL_BUTTON_LEFT:
                                 playing = minesweeper.press_tile(W_W, W_H);
-                                break;
-                            case SDL_BUTTON_RIGHT:
-                                minesweeper.place_flag(W_W, W_H);
                                 break;
                         }
                     }
@@ -86,9 +94,10 @@ int main()
 
         window.clear();
         
-        window.render(minesweeper.get_board(), ROWS, COLS, SCALE);
+        window.render(minesweeper, ROWS, COLS, SCALE);
 
         window.display();
+        SDL_Delay(MS);
     }
 
     return 0; 

@@ -23,7 +23,7 @@ RenderWindow::~RenderWindow()
 }
 
 
-void RenderWindow::render(std::vector<std::vector<tile>> tiles, const int rows, const int cols, const float scale)
+void RenderWindow::render(Game game, const int rows, const int cols, const float scale)
 {
     int w, h;
     SDL_GetWindowSize(window, &w, &h);
@@ -37,7 +37,7 @@ void RenderWindow::render(std::vector<std::vector<tile>> tiles, const int rows, 
             dst.x = 16*j*scale;
             dst.y = 16*i*scale;
 
-            SDL_RenderCopy(renderer, tiles[i][j].tex, &tiles[i][j].rect, &dst);
+            SDL_RenderCopy(renderer, game.get_tex(), &game.get_board()[i][j].rect, &dst);
         }
     }
 }

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 
+#include "Game.hpp"
 #include "Tile.hpp"
 
 class RenderWindow 
@@ -17,7 +18,7 @@ class RenderWindow
 
         SDL_Texture* load_texture(const std::string file_path);
 
-        void render(std::vector<std::vector<tile>> tiles, const int rows, const int cols, const float scale);
+        void render(Game game, const int rows, const int cols, const float scale);
 
         void clear();
         void display();
