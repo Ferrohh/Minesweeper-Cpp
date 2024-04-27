@@ -15,7 +15,7 @@
 #define ROWS 15
 #define COLS 15
 
-#define SCALE 1
+#define SCALE 3
 
 #define N_BOMBS 40
 
@@ -43,6 +43,8 @@ int main()
     srand(time(NULL));
     if(!SDL_init_all()) return 1; // error initializing SDL
 
+    if(!window.set_icon("res/gfx/icon.png")) return 1;
+
     while(running)
     {
         while(SDL_PollEvent(&events))
@@ -57,19 +59,11 @@ int main()
                     {
                         switch(events.button.button)
                         {
-                            case SDL_BUTTON_RIGHT:
-                                minesweeper.place_flag(W_W, W_H);
-                                break;
-                        }
-                    }
-                    break;
-                case SDL_MOUSEBUTTONUP:
-                    if(playing)
-                    {
-                        switch(events.button.button)
-                        {
                             case SDL_BUTTON_LEFT:
                                 playing = minesweeper.press_tile(W_W, W_H);
+                                break;
+							case SDL_BUTTON_RIGHT:
+                                minesweeper.place_flag(W_W, W_H);
                                 break;
                         }
                     }

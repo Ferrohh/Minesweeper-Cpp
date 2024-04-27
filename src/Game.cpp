@@ -49,11 +49,14 @@ void Game::place_flag(const int w_w, const int w_h)
     {
         case not_clicked:
             board[y][x].switch_state(flag);
+            bombs_left--;
             break;
         case flag:
             board[y][x].switch_state(not_clicked);
+            bombs_left++;
             break;
     }
+    std::cout << "bombs left: " << bombs_left << std::endl;
 }
 
 void Game::restart()
@@ -62,5 +65,6 @@ void Game::restart()
     board_map = std::vector<std::vector<uint8_t>>(rows, std::vector<uint8_t>(cols, 0));
     free_cells_count = 0;
     free_cells_total = 0;
+    bombs_left = n_bombs;
     generate_bombs();
 }

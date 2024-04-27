@@ -19,6 +19,7 @@ class RenderWindow
         SDL_Texture* load_texture(const std::string file_path);
 
         void render(Game game, const int rows, const int cols, const float scale);
+        bool set_icon(const std::string icon_file_path);
 
         void clear();
         void display();

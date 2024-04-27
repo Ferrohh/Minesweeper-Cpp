@@ -55,6 +55,20 @@ SDL_Texture* RenderWindow::load_texture(const std::string file_path)
 	return texture;
 }
 
+bool RenderWindow::set_icon(const std::string icon_file_path)
+{
+    SDL_Surface *icon = IMG_Load(icon_file_path.c_str());
+    if (!icon)
+    {
+        std::cerr << "Could not load icon: " << SDL_GetError() << std::endl;
+        return false;
+    }
+    SDL_SetWindowIcon(window, icon);
+
+    SDL_FreeSurface(icon);
+    return true;
+}
+
 void RenderWindow::clear() 
 {
     SDL_RenderClear(renderer);

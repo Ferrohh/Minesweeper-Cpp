@@ -37,7 +37,7 @@ class Game
         std::vector<std::vector<tile>> board; // board, saving rects and states
         std::vector<std::vector<uint8_t>> board_map; // saving where the bombs are placed
         int rows, cols; // dimensions of the field
-        int n_bombs; // number of bombs
+        int n_bombs, bombs_left; // number of bombs
         int free_cells_count, free_cells_total; // counter for counting how many cells the player've free'd
 
         /*      PRIVATE FUNCTIONS       */
